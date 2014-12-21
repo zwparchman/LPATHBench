@@ -10,6 +10,16 @@
 using namespace std;
 using namespace std::chrono;
 
+#ifndef __clang__
+#ifdef __GNUC__  
+#if __GNUC__ < 5
+#warning "some versions of g++ under 5.0 will make this program crash"
+#warning "the December 21 2014 works as does clang."
+#warning "additionally use of an optimizatoin level lower than  -O3 with g++ 5.0 may crash this program"
+#endif
+#endif
+#endif
+
 struct route{
   int dest, cost;
 };
