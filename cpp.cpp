@@ -5,6 +5,7 @@
 #include <iostream>
 #include <string>
 #include <chrono>
+#include <unordered_map>
 
 using namespace std;
 using namespace std::chrono;
@@ -27,7 +28,6 @@ vector<node> readPlaces(){
   }
   return nodes;
 }
-#include <unordered_map>
 
 
 template <int T>
@@ -72,35 +72,35 @@ struct getLongestPath_class{
         }
       }
     }
-
     cmap.emplace( key , max );
     return max;
   }
-
 };  
 
 
 int getLongestPath(const vector<node> &nodes) {
-  if (nodes.size() <= 16) {
-    static getLongestPath_class<16> c;
+  size_t count = nodes.size();
+
+  if (count <= 16) {
+    getLongestPath_class<16> c;
     return c.cache(nodes, 0, bitset<16>());
-  }  else if ( nodes.size() <= 32 ){
-    static getLongestPath_class<32> c;
+  }  else if ( count <= 32 ){
+    getLongestPath_class<32> c;
     return c.cache(nodes, 0, bitset<32>());
-  } else if (nodes.size() <= 256) {
-    static getLongestPath_class<256> c;
+  } else if (count <= 256) {
+    getLongestPath_class<256> c;
     return c.cache(nodes, 0, bitset<256>());
-  } else if (nodes.size() <= 4096) {
-    static getLongestPath_class<4096> c;
+  } else if (count <= 4096) {
+    getLongestPath_class<4096> c;
     return c.nocache(nodes, 0, bitset<4096>());
-  } else if (nodes.size() <= 65536) {
-    static getLongestPath_class<65536> c;
+  } else if (count <= 65536) {
+    getLongestPath_class<65536> c;
     return c.nocache(nodes, 0, bitset<65536>());
-  } else if (nodes.size() <= 1048576) {
-    static getLongestPath_class<1048576> c;
+  } else if (count <= 1048576) {
+    getLongestPath_class<1048576> c;
     return c.nocache(nodes, 0, bitset<1048576>());
-  } else if (nodes.size() <= 16777216) {
-    static getLongestPath_class<16777216> c;
+  } else if (count <= 16777216) {
+    getLongestPath_class<16777216> c;
     return c.nocache(nodes, 0, bitset<16777216>());
   } else {
     return -1;
