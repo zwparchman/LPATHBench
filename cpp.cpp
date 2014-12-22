@@ -28,8 +28,8 @@ struct node {
   vector<route> neighbours;
 };
 
-vector<node> readPlaces(){
-  ifstream text("agraph");
+vector<node> readPlaces( string fname ){
+  ifstream text( fname.c_str() );
   int numNodes; text >> numNodes;
   vector<node> nodes(numNodes);
   int node, neighbour, cost;
@@ -117,8 +117,16 @@ int getLongestPath(const vector<node> &nodes) {
   }
 }
 
-int main(int , char** ){
-  auto nodes = readPlaces();
+int main(int argc , char** argv ){
+  string fname= "agraph"  ;
+  if( argc == 2 ){
+    fname = argv[1];
+  } else if ( argc > 2 ){
+    cout<<"Usage: "<<argv[0]<<" [graphFileName]"<<endl;
+    return 1;
+  }
+
+  auto nodes = readPlaces( fname );
   auto start = high_resolution_clock::now();
   int len = getLongestPath(nodes);
   auto end = high_resolution_clock::now();
