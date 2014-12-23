@@ -19,8 +19,6 @@ int main( int argc , char * argv [] ){
     verticies = atoi( argv[1] );
   }
 
-
-
   int maxDist = 1000;
 
   vector< node  > graph;
